@@ -3,8 +3,7 @@
 <robot name="ibrain" xmlns:xacro="https://www.ros.org/wiki/xacro" >
 
 
-  <xacro:include filename="$(find warehouse_bot)/gazebo/whbot_physics.gazebo"/>
-  <xacro:include filename="$(find warehouse_bot)/urdf/_d435.urdf.xacro" />
+  <xacro:include filename="$(find ibrain)/urdf/_d435.urdf.xacro" />
 
   
   
@@ -268,6 +267,10 @@
     <limit effort="10000" velocity="1000"/>
     <joint_properties damping="1.0" friction="1.0" />
   </joint>  
+
+  <sensor_d435 parent="upper_body">
+    <origin xyz="0.02 1.1e-05 0.08" rpy="0 0 0"/>
+  </sensor_d435>
 
 
 <!-- inner_body -->
