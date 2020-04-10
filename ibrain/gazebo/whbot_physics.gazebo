@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<robot>
+
+	<gazebo reference="joint_left_wheel">
+		<mu1 value="4.0"/>
+		<mu2 value="1.0"/>
+		<fdir1 value="1 0 0"/>
+	</gazebo>
+
+	<gazebo reference="joint_left_wheel2">
+		<mu1 value="4.0"/>
+		<mu2 value="1.0"/>
+		<fdir1 value="1 0 0"/>
+	</gazebo>
+
+	<gazebo reference="joint_right_wheel">
+		<mu1 value="4.0"/>
+		<mu2 value="1.0"/>
+		<fdir1 value="1 0 0"/>
+	</gazebo>
+
+	<gazebo reference="joint_right_wheel2">
+		<mu1 value="4.0"/>
+		<mu2 value="1.0"/>
+		<fdir1 value="1 0 0"/>
+	</gazebo>
+
+</robot>
