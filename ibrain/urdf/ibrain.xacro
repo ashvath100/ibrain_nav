@@ -268,8 +268,10 @@
     <joint_properties damping="1.0" friction="1.0" />
   </joint>  
 
+
+
   <sensor_d435 parent="upper_body">
-    <origin xyz="0.02 1.1e-05 0.08" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 0.35" rpy="0 0 0"/>
   </sensor_d435>
 
 
@@ -395,10 +397,10 @@
 		</plugin>
 	</gazebo>
 
-  	<!--Lidar2-->
+  	<!--Lidar1-->
 
 	<gazebo reference="sensor_laser1">
-		<sensor type="ray" name="head_hokuyo_sensor">
+		<sensor type="ray" name="head_hokuyo_sensor1">
 			<pose>0 0 0 0 0 0</pose>
 			<visualize>false</visualize>
 			<update_rate>10</update_rate>
@@ -430,10 +432,10 @@
 	</gazebo>
 
 
-  	<!--Lidar2 
+  	<!--Lidar2 -->
 
 	<gazebo reference="sensor_laser2">
-		<sensor type="ray" name="head_hokuyo_sensor">
+		<sensor type="ray" name="head_hokuyo_sensor2">
 			<pose>0 0 0 0 0 0</pose>
 			<visualize>false</visualize>
 			<update_rate>10</update_rate>
@@ -442,8 +444,8 @@
 					<horizontal>
 						<samples>720</samples>
 						<resolution>1</resolution>
-						<min_angle>-1.5</min_angle>
-						<max_angle>1.5</max_angle>
+						<min_angle>1.5</min_angle>
+						<max_angle>-1.5</max_angle>
 					</horizontal>
 				</scan>
 				<range>
@@ -462,7 +464,7 @@
 				<frameName>sensor_laser2</frameName>
 			</plugin>
 		</sensor>
-	</gazebo>  -->
+	</gazebo>  
 
 
 
