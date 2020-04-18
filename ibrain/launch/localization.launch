@@ -29,7 +29,7 @@
 
   <node name="rviz" pkg="rviz" type="rviz" />
 
-<node name="map_server" pkg="map_server" type="map_server" args="$(find ibrain)/maps/file.yaml"/>
+<node name="map_server" pkg="map_server" type="map_server" args="$(find ibrain)/maps/room1.yaml"/>
 
 
 
