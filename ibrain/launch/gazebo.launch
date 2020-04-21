@@ -24,7 +24,7 @@
   <param name="default_topic" value="/cmd_vel"/> 
 </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" />
+  <!-- <node name="rviz" pkg="rviz" type="rviz" /> -->
 
 
 </launch>
