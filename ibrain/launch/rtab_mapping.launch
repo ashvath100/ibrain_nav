@@ -26,9 +26,9 @@
 	
 	  <!-- inputs -->
 	  <remap from="scan"            to="/scan1"/>
-	  <remap from="rgb/image"       to="/camera/color/image_raw"/>
+	  <remap from="rgb/image"       to="/camera/rgb/image_raw"/>
   	  <remap from="depth/image"     to="/camera/depth/image_raw"/>
-  	  <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
+  	  <remap from="rgb/camera_info" to="/camera/rgb/camera_info"/>
   	  
   	  <!-- output -->
   	  <remap unless="$(arg version083)" from="grid_map" to="/map"/>
@@ -46,7 +46,7 @@
 	  <param name="RGBD/LinearUpdate"            type="string" value="0.1"/>    <!-- Update map only if the robot is moving -->
 	  <param name="Rtabmap/TimeThr"              type="string" value="700"/>
 	  <param name="Mem/RehearsalSimilarity"      type="string" value="0.30"/>   
-	  <param name="queue_size"      type="string" value="30"/>   
+	  <param name="queue_size" value="30"/>   
 	  <!-- localization mode -->
 	  <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
 	  <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
@@ -59,9 +59,9 @@
       <param name="frame_id" type="string" value="link_chassis"/>
       <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
     
-	  <remap from="rgb/image"       to="/camera/color/image_raw"/>
+	  <remap from="rgb/image"       to="/camera/rgb/image_raw"/>
   	  <remap from="depth/image"     to="/camera/depth/image_raw"/>
-  	  <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
+  	  <remap from="rgb/camera_info" to="/camera/rgb/camera_info"/>
       <remap from="scan"            to="/scan1"/>
     </node>
     

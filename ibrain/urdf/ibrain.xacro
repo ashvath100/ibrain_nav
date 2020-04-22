@@ -3,7 +3,7 @@
 <robot name="ibrain" xmlns:xacro="https://www.ros.org/wiki/xacro" >
 
 
-  <xacro:include filename="$(find ibrain)/urdf/_d435.urdf.xacro" />
+  <!-- <xacro:include filename="$(find ibrain)/urdf/kinect_camera.urdf.xacro" /> -->
 
   
   
@@ -270,9 +270,9 @@
 
 
 
-  <sensor_d435 parent="upper_body">
+  <!-- <kinect_camera parent="upper_body" name="camera">
     <origin xyz="0.05 0.0 -0.36" rpy="0 0 0"/>
-  </sensor_d435>
+  </kinect_camera> -->
 
 
 <!-- inner_body -->
@@ -402,7 +402,7 @@
 	</gazebo>
   
   <!-- imu --> 
-    <gazebo>
+    <!-- <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
       <bodyName>camera_link</bodyName>
@@ -411,9 +411,95 @@
       <gaussianNoise>0.0</gaussianNoise>
       <updateRate>20.0</updateRate>
     </plugin>
-  </gazebo>
+  </gazebo> -->
+
+<joint name="camera_joint" type="fixed">
+        <parent link="upper_body"/>
+        <child link="camera_link"/>
+      </joint>
+
+      <link name="camera_link">
+        <inertial_sphere mass="0.01" diameter="0.07" />
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://ibrain/meshes/kinect.dae"/>
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://ibrain/meshes/kinect.dae"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="camera_depth_joint" type="fixed">
+        <origin xyz="0.0 -0.02 0.0" rpy="0 0 0" />
+        <parent link="camera_link" />
+        <child link="camera_depth_frame"/>
+      </joint>
+
+      <link name="camera_depth_frame"/>
+
+      <joint name="camera_depth_optical_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="${-3.14/2} 0.0 ${-3.14/2}" />
+        <parent link="camera_depth_frame" />
+        <child link="camera_depth_optical_frame"/>
+      </joint>
+
+      <link name="camera_depth_optical_frame"/>
+
+      <joint name="camera_rgb_joint" type="fixed">
+        <origin xyz="0.0 -0.0125 0.0" rpy="0 0 0" />
+        <parent link="camera_link" />
+        <child link="camera_rgb_frame"/>
+      </joint>
+
+      <link name="camera_rgb_frame"/>
+
+      <joint name="camera_rgb_optical_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="${-3.14/2} 0.0 ${-3.14/2}" />
+        <parent link="camera_rgb_frame" />
+        <child link="camera_rgb_optical_frame"/>
+      </joint>
+
+      <link name="camera_rgb_optical_frame"/>
 
 
+      <gazebo reference="camera_depth_frame">
+        <sensor type="depth" name="camera">
+          <update_rate>20</update_rate>
+          <camera>
+            <horizontal_fov>${60 * 3.14/180.0}</horizontal_fov>
+            <image>
+              <format>R8G8B8</format>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <clip>
+              <near>0.05</near>
+              <far>3</far>
+            </clip>
+          </camera>
+          <plugin name="camera_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>20</updateRate>
+            <imageTopicName>camera/rgb/image_raw</imageTopicName>
+            <cameraInfoTopicName>camera/rgb/camera_info</cameraInfoTopicName>
+            <depthImageTopicName>camera/depth/image_raw</depthImageTopicName>
+            <depthImageCameraInfoTopicName>camera/depth/camera_info</depthImageCameraInfoTopicName>
+            <pointCloudTopicName>camera/depth/points</pointCloudTopicName>
+            <frameName>camera_depth_optical_frame</frameName>
+            <distortion_k1>0.0</distortion_k1>
+            <distortion_k2>0.0</distortion_k2>
+            <distortion_k3>0.0</distortion_k3>
+            <distortion_t1>0.0</distortion_t1>
+            <distortion_t2>0.0</distortion_t2>
+          </plugin>
+        </sensor>
+      </gazebo>
+ 
  
 
 
