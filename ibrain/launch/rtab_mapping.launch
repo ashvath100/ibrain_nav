@@ -6,9 +6,12 @@
   <arg name="version083"        default="false"/>
   <arg name="rtabmapviz"        default="true"/>
   <arg name="wait_for_transform"  default="0.1"/>
+
+	<include file="$(find ibrain)/launch/gazebo.launch"/> 
+
   
   <!-- Navigation stuff (move_base) -->
-  <!-- <include file="$(find ibrain)/launch//movebase.launch"/> -->
+  <include file="$(find ibrain)/launch/movebase.launch"/>
   
   <!-- Mapping -->
   <group ns="rtabmap">
@@ -43,7 +46,7 @@
 	  <param name="RGBD/LinearUpdate"            type="string" value="0.1"/>    <!-- Update map only if the robot is moving -->
 	  <param name="Rtabmap/TimeThr"              type="string" value="700"/>
 	  <param name="Mem/RehearsalSimilarity"      type="string" value="0.30"/>   
-	  
+	  <param name="queue_size"      type="string" value="30"/>   
 	  <!-- localization mode -->
 	  <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
 	  <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
